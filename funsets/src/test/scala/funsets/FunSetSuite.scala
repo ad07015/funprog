@@ -143,4 +143,27 @@ class FunSetSuite extends FunSuite {
       assert(!contains(f, 3))
     }
   }
+
+  test("exists") {
+    new TestSets {
+      val s = union(union(s1, s2), s3)
+      val p = (x: Int) => x > 2
+      val f = exists(s, p)
+      assert(exists(s, p))
+      assert(!exists(singletonSet(1), p))
+    }
+  }
+
+  test("map") {
+    new TestSets {
+      val s = union(union(s1, s2), s3)
+      val p = (x: Int) => x * 2
+      val f = map(s, p)
+      assert(!contains(f, 1))
+      assert(!contains(f, 3))
+      assert(contains(f, 2))
+      assert(contains(f, 4))
+      assert(contains(f, 6))
+    }
+  }
 }
